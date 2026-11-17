@@ -74,9 +74,10 @@ void handleButtonPress(int btn_count) {
     int steam_val = analogRead(steam);
     lcd.clear();
     lcd.setCursor(0, 0);
-    lcd.print("Moisture: ");
-    lcd.setCursor(10, 0);
-    lcd.print(steam_val);
+    lcd.print("Moisture(%): ");
+    lcd.setCursor(0, 1);
+    int steamPercent = map(steam_val, 0, 4095, 0, 100);
+    lcd.print(steamPercent);
     delay(300);
   }
   
