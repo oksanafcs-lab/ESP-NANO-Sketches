@@ -41,7 +41,6 @@ void checkBluetoothData() {
     SerialBT.connect(slaveName);
     return;
   }
-  // Якщо прийшов рядок формату "24,55"
   if (SerialBT.available() > 0) {
     String btData = SerialBT.readStringUntil('\n');
     btData.trim();
@@ -49,14 +48,8 @@ void checkBluetoothData() {
     int secondColon = btData.indexOf(':', firstColon + 1);
 
     if (firstColon > 0 && secondColon > 0) {
-      // toInt() автоматично ігнорує пробіл після двокрапки і зупиняється на знаку "°C" або "%"
       int temp = btData.substring(firstColon + 1).toInt();
       int hum = btData.substring(secondColon + 1).toInt();
-
-      // Відправляємо у Blynk
-      Blynk.virtualWrite(V1, temp);
-      Blynk.virtualWrite(V3, hum);
-
       Serial.print("Розпарсено -> Temp (V1): ");
       Serial.print(temp);
       Serial.print(" °C, Hum (V3): ");
